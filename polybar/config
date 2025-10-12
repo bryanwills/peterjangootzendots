@@ -38,7 +38,7 @@ font-3 = la\-brands\-400:pixelsize=9;1
 
 modules-left = i3
 modules-center = spotify
-modules-right = dnd unread_mail bt_headphones filesystem memory current_draw gpu battery date
+modules-right = dnd unread_mail bt_headphones filesystem memory current_draw battery date
 
 tray-position = right
 tray-padding = 2
@@ -421,7 +421,7 @@ interval = 1
 format-prefix = " "
 format = <label>
 exec = python /home/peter-jan/apps/polybar-spotify/spotify_status.py -f '[{play_pause}] {artist}: {song}' -p ','
-click-left = playerctl play-pause
+click-left = playerctl play-pause -p spotify
 
 [settings]
 screenchange-reload = true

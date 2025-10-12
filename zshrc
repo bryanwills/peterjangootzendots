@@ -33,8 +33,8 @@ alias cpu="watch -n.5 'cat /proc/cpuinfo | grep \"^[c]pu MHz\"'"
 alias q="exit"
 alias m="ncmpcpp"
 alias k="keyboard.sh"
-alias vi="nvim"
-alias vim="nvim"
+#alias vi="nvim"
+#alias vim="nvim"
 alias rmf="/usr/bin/rm"
 alias rm="trash"
 # Machine specific aliases
@@ -85,12 +85,22 @@ source ~/.dotfiles/nnn.zsh
 # Indicate in the PS1 that we came from a nnn !
 [ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
 
-# For Firefox VA-API hardware acceleration
-export MOZ_X11_EGL=1
-export MOZ_WEBRENDER=1
+export XDG_CONFIG_HOME=$HOME/.config
 
-export QT_QPA_PLATFORMTHEME=qt5ct
-export QT_STYLE_OVERRIDE=gtk2
+export XCURSOR_THEME=capitaine-cursors
+# fix waybar tray
+export XDG_CURRENT_DESKTOP=Unity
+
+# For Firefox VA-API hardware acceleration
+export MOZ_WEBRENDER=1
+export MOZ_ENABLE_WAYLAND=1
+
+# set QT to use wayland
+#export QT_QPA_PLATFORM=wayland
+# fix some qt programs not displaying tray icon on wayland
+#export QT_QPA_PLATFORMTHEME=qt5ct
+#export QT_STYLE_OVERRIDE=gtk2
+
 export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 export EDITOR=nvim
 export VISUAL=nvim
@@ -126,21 +136,19 @@ export PATH="$HOME/.luarocks/bin:$PATH"
 export PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH="$HOME/intel/oneapi/advisor/latest/bin64:$PATH"
 export PATH="/opt/cuda/nsight_compute:$PATH"
+export PATH="$HOME/apps/likwid/install/bin:$PATH"
+export LD_LIBRARY_PATH="/home/peter-jan/apps/likwid/install/lib:$LD_LIBRARY_PATH"
 
-# Machine specific variables
-if [[ $(uname -n) == 'SpaceMonkey' ]]; then
-    export MUSIC=/mnt/storage/Media/Music
-fi
 export XM3_DEVICE_ID=94:DB:56:A3:F4:98
 
 
 # startup
 if [ $(tty) = "/dev/tty1" ]; then
-    exec startx
+    sway-init.sh
 elif [[ $(tty) == "/dev/tty2" ]]; then
     exec nvidia-xrun
 elif [[ $(tty) == "/dev/tty3" ]]; then
-    exec sway
+    exec startx
 elif [[ $(tty) == "/dev/tty"* ]]; then
     cowsay "What are you doing here?" | lolcat
 fi

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
 xrandr-desktop.sh
-sleep .5
+sleep 1
 nitrogen --restore
 polybar-desktop

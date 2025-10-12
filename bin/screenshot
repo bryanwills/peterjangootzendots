@@ -1,2 +1,2 @@
 #!/bin/sh
-maim -u | tee ~/Pictures/Screenshots/$(date +"%m-%d-%y_%H:%M:%S").png | xclip -selection clipboard -t image/png
+grimshot --notify save $1 - | tee ~/Pictures/Screenshots/$(date +"%m-%d-%y_%H:%M:%S").png | wl-copy -t image/png
